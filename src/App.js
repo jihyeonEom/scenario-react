@@ -3,8 +3,16 @@ import Login from './Login';
 import Mainpage from './Mainpage';
 import {BrowserRouter, Routes, Route} from "react-router-dom"
 import ProjectInfopage from './ProjectInfopage';
+import axios from 'axios';
+import { useEffect } from 'react';
 
 function App() {
+
+  useEffect( () => {
+    axios.get('/api/test')
+      .then(res => console.log(res))
+      .catch()
+  })
 
   return (
     <>
