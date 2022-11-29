@@ -5,6 +5,13 @@ import {BrowserRouter, Routes, Route} from "react-router-dom"
 import ProjectInfopage from './ProjectInfopage';
 import React, { Component } from 'react'
 
+/*
+  추가해야 할 점
+  * ID 중복확인
+  * DB 연동(문제: select * from --- 에서 모든 결과 출력이 불가)
+  * 프로젝트 검색 함수
+*/
+
 export default class App extends Component {
   state = {
     testbody : "",
@@ -35,6 +42,7 @@ export default class App extends Component {
         testbody : json.text,
       });
     });
+    alert("insert success!");
   };
   onCall =()=>{
     fetch("http://localhost:3002/callbody",{
@@ -54,12 +62,13 @@ export default class App extends Component {
   render() {
     return (
       <div>
+        <h1>insert data</h1>
         <input onChange={this.handleChange} name ="testbody"/>
         <button onClick = {this.submitId}>Submit</button>
         <h1>{this.state.testbody}</h1>
         <br/><br/><br/><br/><br/>
-        <h2>데이터가져오기</h2>
-        <h3>{this.state.data}</h3>
+        <h1>get data</h1>
+        <h3>data: {this.state.data}</h3>
         <button onClick={this.onCall}>가져오기</button>
         <BrowserRouter>
         <Routes>

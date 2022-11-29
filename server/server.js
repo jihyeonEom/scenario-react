@@ -8,8 +8,8 @@ const mysql = require("mysql"); // mysql 모듈 사용
 var connection = mysql.createConnection({
     host : "localhost",
     user : "root", //mysql의 id
-    password : "killer", //mysql의 password
-    database : "practice", //사용할 데이터베이스
+    password : "root", //mysql의 password
+    database : "DBName", //사용할 데이터베이스
 });
 
 connection.connect();
@@ -28,9 +28,9 @@ app.post("/idplz", (req,res)=>{
     connection.query("INSERT INTO test (test_body) values (?)",[test],
     function(err,rows,fields){
         if(err){
-            console.log("실패");
+            console.log("insert fail");
         }else{
-            console.log("성공");
+            console.log("insert success");
         };
     });
 });
@@ -39,11 +39,10 @@ app.post("/callbody", (req,res)=>{
     connection.query("SELECT * FROM test",
     function(err,result){
         if(err){
-            console.log("불러오기 실패");
+            console.log("fail to get data");
         }else{
-            console.log("불러오기 성공");
-            res.send(result[0]);
-
+            console.log("success to get data");
+            res.send(result[0]); // table의 첫번째 데이터 출력
             // console.log(result[0]);
         }
     })

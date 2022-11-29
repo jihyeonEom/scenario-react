@@ -1,12 +1,7 @@
 import React, { useEffect, useState } from 'react'
-import { Routes, Route, useNavigate } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 import Mainpage from './Mainpage';
-/*
-  추가해야 할 점
-  * ID 중복확인
-  * DB 연동(1)
-  * 프로젝트 검색 함수
-*/
+
 
 // test case
 const User = {
