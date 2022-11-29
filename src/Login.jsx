@@ -4,6 +4,8 @@ import Mainpage from './Mainpage';
 /*
   추가해야 할 점
   * ID 중복확인
+  * DB 연동(1)
+  * 프로젝트 검색 함수
 */
 
 // test case
@@ -50,7 +52,7 @@ export default function Login() {
         alert('로그인에 성공했습니다.')
         goMainpage();
       } else {
-        alert("등록되지 않은 회원입니다.");
+        alert("등록되지 않은 직원입니다.");
       }
     }
 
