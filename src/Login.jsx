@@ -1,12 +1,15 @@
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from "react-router-dom"
-import Mainpage from './Mainpage';
-
+// import Mainpage from './Mainpage';
 
 // test case
+// const User = {
+//   id: 'mjuD0000',
+//   pw: 'abcd1234'
+// }
 const User = {
-  id: 'mjuD0000',
-  pw: 'abcd1234'
+  id: "",
+  pw: "",
 }
 
 export default function Login() {
@@ -21,6 +24,20 @@ export default function Login() {
     const goMainpage = () => {
       navigate('/Mainpage');
     }
+
+    fetch("http://localhost:3002/empinfo",{
+      method:"post",
+      headers : {
+        'Content-Type' : 'application/json'
+      },
+    })
+    .then((res)=>res.json())
+    .then((json)=>{
+      this.setState({
+        id : json.emp_ID,
+        pw : json.emp_pwd,
+      });
+    });
 
     useEffect(() => {
       if(idValid && pwValid) {

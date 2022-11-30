@@ -5,48 +5,51 @@ const cors = require("cors");
 const bodyParser = require("body-parser");
 const mysql = require("mysql"); // mysql 모듈 사용
 
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(cors());
+
 var connection = mysql.createConnection({
     host : "localhost",
     user : "root", //mysql의 id
-    password : "root", //mysql의 password
-    database : "DBName", //사용할 데이터베이스
+    password : "killer", //mysql의 password
+    database : "DBdesign", //사용할 데이터베이스
 });
 
 connection.connect();
 
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
-app.use(cors());
-
-app.get('/', (req, res) =>{
-    res.send('it is test!')
-})
-
-app.post("/idplz", (req,res)=>{
-    const test = req.body.test;
-    console.log(req.body);
-    connection.query("INSERT INTO test (test_body) values (?)",[test],
-    function(err,rows,fields){
-        if(err){
-            console.log("insert fail");
-        }else{
-            console.log("insert success");
-        };
-    });
-});
-
 app.post("/callbody", (req,res)=>{
-    connection.query("SELECT * FROM test",
-    function(err,result){
+    connection.query("SELECT emp_ID FROM employee",
+    function(err, rows, fields){
+        for(var i =0; i<80; i++){
+            console.log(rows[i]);
+        }
         if(err){
             console.log("fail to get data");
         }else{
             console.log("success to get data");
-            res.send(result[0]); // table의 첫번째 데이터 출력
-            // console.log(result[0]);
+            // res.send(rows.nicname);
+            
         }
     })
 })
+app.post("/empinfo", (req,res)=>{
+    connection.query("SELECT emp_ID as id, emp_pwd as pw FROM employee",
+    function(err, rows, fields){
+        for(var i =0; i<80; i++){
+            console.log(rows[i].id);
+            console.log(rows[i].pw);
+        }
+        if(err){
+            console.log("fail to get data");
+        }else{
+            console.log("success to get data");
+            // res.send(rows.nicname);
+            
+        }
+    })
+})
+
 
 app.listen(port, ()=>{
     console.log(`Connect at http://localhost:${port}`);
